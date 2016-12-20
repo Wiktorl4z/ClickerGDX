@@ -21,13 +21,18 @@ public abstract class AbstractScreen implements Screen{
         createCamera();
         stage = new Stage(new StretchViewport(MyGdxGame.WIDTH, MyGdxGame.HEIGHT, camera));
         spriteBatch = new SpriteBatch();
-        Gdx.input.setInputProcessor(stage);
+        Gdx.input.setInputProcessor(stage); // pobieramy naszego stage
     }
 
     private void createCamera() {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, MyGdxGame.WIDTH, MyGdxGame.HEIGHT);
         camera.update();
+    }
+
+    @Override
+    public void show() {
+
     }
 
     @Override
@@ -48,6 +53,11 @@ public abstract class AbstractScreen implements Screen{
     }
 
     @Override
+    public void hide() {
+
+    }
+
+    @Override
     public void pause() {
         game.setPaused(true);
     }
@@ -57,15 +67,7 @@ public abstract class AbstractScreen implements Screen{
         game.dispose();
     }
 
-    @Override
-    public void hide() {
 
-    }
-
-    @Override
-    public void show() {
-
-    }
 
     @Override
     public void resize(int width, int height) {
