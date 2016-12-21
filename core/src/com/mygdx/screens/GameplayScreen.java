@@ -9,10 +9,9 @@ public class GameplayScreen extends AbstractScreen {
 
     public GameplayScreen(MyGdxGame game) {
         super(game);
-        init();
     }
 
-    private void init() {
+    protected void init() {
        initPlayer();
     }
 
