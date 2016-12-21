@@ -33,9 +33,9 @@ public class GameplayScreen extends AbstractScreen {
         playerButton.addListener(new ClickListener() {          // przechwytywanie akcji w Buttonie
 
             @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) { 
-
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 System.out.println("click");
+                player.reactOnClick();
                 return super.touchDown(event, x, y, pointer, button);
             }
         });
