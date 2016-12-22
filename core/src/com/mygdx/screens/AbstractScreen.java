@@ -9,7 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.mygdx.game.MyGdxGame;
 
-public abstract class AbstractScreen implements Screen{
+public abstract class AbstractScreen implements Screen {
 
     protected MyGdxGame game;
     protected Stage stage;  // each screen will have his own Stage
@@ -45,7 +45,7 @@ public abstract class AbstractScreen implements Screen{
         spriteBatch.setProjectionMatrix(camera.combined);
     }
 
-    private void clearScreen(){
+    private void clearScreen() {
         Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
     }
@@ -69,7 +69,6 @@ public abstract class AbstractScreen implements Screen{
     public void dispose() {
         game.dispose();
     }
-
 
 
     @Override

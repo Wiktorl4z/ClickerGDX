@@ -1,7 +1,9 @@
 package com.mygdx.screens;
 
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.entities.Player;
 import com.mygdx.game.MyGdxGame;
@@ -10,19 +12,30 @@ public class GameplayScreen extends AbstractScreen {
 
     private Player player;
     private Button playerButton;
+    private Label scoreLabel;  // uzywany w 2D
 
     public GameplayScreen(MyGdxGame game) {
         super(game);
     }
 
     protected void init() {
-       initPlayer();
+        initPlayer();
         initPlayerButton();
+        initScoreLabel();
+    }
+
+    private void initScoreLabel() {
+        Label.LabelStyle labelStyle = new Label.LabelStyle();
+        labelStyle.font = new BitmapFont();
+        scoreLabel = new Label("Test123", labelStyle);
+        scoreLabel.setX(20);
+        scoreLabel.setY(650);
+        stage.addActor(scoreLabel);
     }
 
     private void initPlayerButton() {
         playerButton = new Button(new Button.ButtonStyle()); // chodzi o to aby button był przezroczysty po to dodajemy
-                                                            // Button.ButtonStyle
+        // Button.ButtonStyle
         playerButton.setWidth(460);
         playerButton.setHeight(360);
         playerButton.setX(10);
