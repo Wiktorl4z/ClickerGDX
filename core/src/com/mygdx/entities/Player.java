@@ -26,6 +26,7 @@ public class Player extends Image {
         this.setPosition(STARTING_X, STARTING_Y);
 
 
+
     }
 
     public void reactOnClick() {
