@@ -10,6 +10,7 @@ import com.mygdx.game.MyGdxGame;
 import com.mygdx.ui.IClickCallBack;
 import com.mygdx.ui.PlayerButton;
 import com.mygdx.ui.ResetScoreButton;
+import com.mygdx.ui.ScoreLabel;
 
 import static com.badlogic.gdx.scenes.scene2d.InputEvent.Type.touchDown;
 
@@ -18,7 +19,7 @@ public class GameplayScreen extends AbstractScreen {
     private Player player;
     private PlayerButton playerButton;
     private ResetScoreButton resetScoreButton;
-    private Label scoreLabel;  // uzywany w 2D
+    private ScoreLabel scoreLabel;  // uzywany w 2D
 
     public GameplayScreen(MyGdxGame game) {
         super(game);
@@ -42,11 +43,7 @@ public class GameplayScreen extends AbstractScreen {
     }
 
     private void initScoreLabel() {
-        Label.LabelStyle labelStyle = new Label.LabelStyle();
-        labelStyle.font = new BitmapFont();
-        scoreLabel = new Label("Test123", labelStyle);
-        scoreLabel.setX(20);
-        scoreLabel.setY(650);
+      scoreLabel = new ScoreLabel();
         stage.addActor(scoreLabel);
     }
 
