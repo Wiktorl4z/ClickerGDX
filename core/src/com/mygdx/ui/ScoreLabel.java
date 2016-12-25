@@ -5,10 +5,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 public class ScoreLabel extends Label {
 
-  public ScoreLabel(){
-      super("", prepareLabelStyle());
-      init();
-  }
+    public ScoreLabel() {
+        super("", prepareLabelStyle());
+        init();
+    }
 
     private void init() {
         this.setX(20);
