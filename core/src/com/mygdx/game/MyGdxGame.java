@@ -17,34 +17,12 @@ public class MyGdxGame extends Game {
 
     private int points;
 
+
+
     @Override
     public void create() {
         init();
         this.setScreen(new SplashScreen(this));
-    }
-
-    public void init() { // iniciowanie preferencji
-        prefs = Gdx.app.getPreferences(GAME_PREFS);
-        loadScores();
-    }
-
-    public void addPoint() {
-        points++;
-        updateSavedScoreInPrefs();
-    }
-
-    private void updateSavedScoreInPrefs() {
-        prefs.putInteger(GAME_SCORE, points); // co zapisujemy
-        prefs.flush();
-    }
-
-    public void loadScores() {
-        points = prefs.getInteger(GAME_SCORE);
-    }
-
-    public void resetGameScore() {
-        points = 0;
-        updateSavedScoreInPrefs();
     }
 
     public boolean isPaused() {
@@ -57,5 +35,19 @@ public class MyGdxGame extends Game {
 
     public int getPoints() {
         return points;
+    }
+
+    public void init(){ // iniciowanie preferencji
+        prefs = Gdx.app.getPreferences(GAME_PREFS);
+        loadScores();
+    }
+    public void addPoint() {
+        points++;
+        prefs.putInteger(GAME_SCORE, points); // co zapisujemy
+        prefs.flush();
+    }
+
+    public void loadScores(){
+        points = prefs.getInteger(GAME_SCORE);
     }
 }

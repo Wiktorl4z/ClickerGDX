@@ -8,12 +8,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.entities.Player;
 import com.mygdx.game.MyGdxGame;
 
-import static com.badlogic.gdx.scenes.scene2d.InputEvent.Type.touchDown;
-
 public class GameplayScreen extends AbstractScreen {
 
     private Player player;
-    private Button playerButton, resetScoreButton;
+    private Button playerButton;
     private Label scoreLabel;  // uzywany w 2D
 
     public GameplayScreen(MyGdxGame game) {
@@ -24,27 +22,6 @@ public class GameplayScreen extends AbstractScreen {
         initPlayer();
         initPlayerButton();
         initScoreLabel();
-        initResetScoreButton();
-    }
-
-    private void initResetScoreButton() {
-        resetScoreButton = new Button(new Button.ButtonStyle());
-        resetScoreButton.setWidth(100);
-        resetScoreButton.setHeight(100);
-        resetScoreButton.setX(330);
-        resetScoreButton.setY(560);
-        resetScoreButton.setDebug(true);
-
-        stage.addActor(resetScoreButton); // dodajemy button do sceny
-
-        resetScoreButton.addListener(new ClickListener(){
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                game.resetGameScore();
-                return super.touchDown(event, x, y, pointer, button);
-
-            }
-        });
     }
 
     private void initScoreLabel() {
