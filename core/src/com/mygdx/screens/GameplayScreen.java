@@ -12,7 +12,7 @@ import com.mygdx.ui.ScoreLabel;
 
 public class GameplayScreen extends AbstractScreen {
 
-    private Texture bgTexture;
+    private Image bgImage;
     private Player player;
     private PlayerButton playerButton;
     private ResetScoreButton resetScoreButton;
@@ -23,11 +23,18 @@ public class GameplayScreen extends AbstractScreen {
     }
 
     protected void init() {
-        bgTexture = new Texture("bg.png");
+        bgImage = new Image(new Texture("bg.png"));
+        stage.addActor(bgImage);
+        bgInit();
         initPlayer();
         initPlayerButton();
         initScoreLabel();
         initResetScoreButton();
+    }
+
+    private void bgInit() {
+        bgImage = new Image(new Texture("bg.png"));
+        stage.addActor(bgImage);
     }
 
     private void initResetScoreButton() {
@@ -69,10 +76,6 @@ public class GameplayScreen extends AbstractScreen {
         update();
 
         System.out.printf("Points: " + game.getPoints());
-
-        spriteBatch.begin();
-        spriteBatch.draw(bgTexture, 0, 0);
-        spriteBatch.end();
 
         spriteBatch.begin();
         stage.draw();
