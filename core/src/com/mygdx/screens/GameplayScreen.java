@@ -2,6 +2,7 @@ package com.mygdx.screens;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.mygdx.controllers.FlyingObjectController;
 import com.mygdx.entities.Player;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.ui.IClickCallBack;
@@ -16,6 +17,7 @@ public class GameplayScreen extends AbstractScreen {
     private PlayerButton playerButton;
     private ResetScoreButton resetScoreButton;
     private ScoreLabel scoreLabel;// uzywany w 2D
+    private FlyingObjectController flyingObjectController;
 
     public GameplayScreen(MyGdxGame game) {
         super(game);
@@ -33,6 +35,7 @@ public class GameplayScreen extends AbstractScreen {
     }
 
     private void initFlyingStuffObjects() {
+        flyingObjectController = new FlyingObjectController(game, stage);
 
     }
 
@@ -71,7 +74,6 @@ public class GameplayScreen extends AbstractScreen {
     private void initPlayer() {
         player = new Player();
         stage.addActor(player);
-
     }
 
     @Override
