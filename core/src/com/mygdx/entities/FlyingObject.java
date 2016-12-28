@@ -58,15 +58,21 @@ public class FlyingObject extends Image {
     private void playSpawnSound() {
         if (FlyingObjectType.MONEY.equals(type)){
             game.getSoundService().playMoneySound();
+        } else {
+            game.getSoundService().playBookSound();
         }
     }
 
     private void reactOnClick() {
         if (FlyingObjectType.MONEY.equals(type)) {
             game.addPoints(50);
+            game.getSoundService().playPickSound();
+
         } else if (FlyingObjectType.PASSIVE.equals(type)) {
             game.addPassiveIncome();
+
         }
+        game.getSoundService().playPickSound();
         FlyingObject.this.remove();
     }
 
