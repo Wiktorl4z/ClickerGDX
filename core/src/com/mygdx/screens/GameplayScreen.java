@@ -3,6 +3,7 @@ package com.mygdx.screens;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.mygdx.entities.FlyingObject;
 import com.mygdx.entities.Player;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.ui.IClickCallBack;
@@ -16,7 +17,8 @@ public class GameplayScreen extends AbstractScreen {
     private Player player;
     private PlayerButton playerButton;
     private ResetScoreButton resetScoreButton;
-    private ScoreLabel scoreLabel;  // uzywany w 2D
+    private ScoreLabel scoreLabel;// uzywany w 2D
+    private FlyingObject flyingObject1;
 
     public GameplayScreen(MyGdxGame game) {
         super(game);
@@ -30,6 +32,13 @@ public class GameplayScreen extends AbstractScreen {
         initPlayerButton();
         initScoreLabel();
         initResetScoreButton();
+        initFlyingObjects();
+    }
+
+    private void initFlyingObjects() {
+        flyingObject1 = new FlyingObject();
+        stage.addActor(flyingObject1);
+        flyingObject1.fly();
     }
 
     private void bgInit() {
