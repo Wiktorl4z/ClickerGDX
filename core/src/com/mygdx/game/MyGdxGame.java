@@ -3,7 +3,9 @@ package com.mygdx.game;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.audio.Sound;
 import com.mygdx.screens.SplashScreen;
+import com.mygdx.service.SoundService;
 
 public class MyGdxGame extends Game {
 
@@ -14,8 +16,8 @@ public class MyGdxGame extends Game {
     public final static int HEIGHT = 700;
     private boolean paused;
     private Preferences prefs;
-
     private int points;
+    private SoundService soundService;
 
     @Override
     public void create() {
@@ -26,6 +28,11 @@ public class MyGdxGame extends Game {
     public void init() { // iniciowanie preferencji
         prefs = Gdx.app.getPreferences(GAME_PREFS);
         loadScores();
+        initSoundService();
+    }
+
+    private void initSoundService() {
+        soundService = new SoundService();
     }
 
     public void addPoints(int pointsToAdd) {
@@ -66,5 +73,9 @@ public class MyGdxGame extends Game {
 
     public void addPassiveIncome() {
         System.out.println("Passive income click");
+    }
+
+    public SoundService getSoundService() {
+        return soundService;
     }
 }
