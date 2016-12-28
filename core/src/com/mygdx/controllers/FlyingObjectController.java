@@ -32,14 +32,14 @@ public class FlyingObjectController {
                     }
                 }, spawnTime);
             }
-        },0 ,5);
+        }, 0, 5);
     }
 
     private void randomizeSpawnTime() {
         spawnTime = MathUtils.random(5, 10); // start 5 end 10 sec
     }
 
-    private void addRandomFlyingObjectToStage(MyGdxGame game, Stage stage){
+    private void addRandomFlyingObjectToStage(MyGdxGame game, Stage stage) {
         FlyingObject flyingObject = null;
 
         if (MathUtils.randomBoolean()) {
