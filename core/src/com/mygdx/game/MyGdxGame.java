@@ -28,6 +28,11 @@ public class MyGdxGame extends Game {
         loadScores();
     }
 
+    public void addPoints(int pointsToAdd) {
+        points += pointsToAdd;
+        updateSavedScoreInPrefs();
+    }
+
     public void addPoint() {
         points++;
         updateSavedScoreInPrefs();
@@ -57,5 +62,9 @@ public class MyGdxGame extends Game {
 
     public int getPoints() {
         return points;
+    }
+
+    public void addPassiveIncome() {
+        System.out.println("Passive income click");
     }
 }

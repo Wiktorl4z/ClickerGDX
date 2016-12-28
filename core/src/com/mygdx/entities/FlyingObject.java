@@ -6,19 +6,30 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.mygdx.game.MyGdxGame;
 
 public class FlyingObject extends Image {
 
+    public enum FlyingObjectType {
+        MONEY, PASSIVE
+    }
+
     public final static String MONEY = "money.png";
+    public final static String PASSIVE = "books.png";
     private final static int WIDHT = 150;
     private final static int HEIGHT = 150;
 
     private final static int STARTING_X = 0;
     private final static int STARTING_Y = -100; // outside the window
 
-    public FlyingObject() {
+    private FlyingObjectType type;
+    private MyGdxGame game;
 
-        super(new Texture(MONEY));
+    public FlyingObject(FlyingObjectType type, MyGdxGame game) {
+        super(new Texture(getTextireString(type)));
+
+        this.type = type;
+        this.game = game;
 
         this.setOrigin(WIDHT / 2, HEIGHT / 2);
         this.setSize(WIDHT, HEIGHT);
@@ -26,24 +37,44 @@ public class FlyingObject extends Image {
         // starting position
         this.setPosition(STARTING_X, STARTING_Y);
 
-        this.addListener(new ClickListener(){
+        this.addListener(new ClickListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("touched");
+
+                reactOnClick();
+
                 FlyingObject.this.remove();
                 return super.touchDown(event, x, y, pointer, button);
             }
         });
     }
 
-    public void fly(){
+    private void reactOnClick() {
+        if (FlyingObjectType.MONEY.equals(type)) {
+            game.addPoints(50);
+        } else if (FlyingObjectType.PASSIVE.equals(type)) {
+            game.addPassiveIncome();
+        }
+        FlyingObject.this.remove();
+    }
+
+    private static String getTextireString(FlyingObjectType type) {
+        if (FlyingObjectType.MONEY.equals(type)) {
+            return MONEY;
+        } else if (FlyingObjectType.PASSIVE.equals(type)) {
+            return PASSIVE;
+        }
+        return "";
+    }
+
+    public void fly() {
         Action a = Actions.parallel(
-                Actions.moveBy(300,200,5),
-                Actions.rotateBy(360,5)
+                Actions.moveBy(300, 200, 5),
+                Actions.rotateBy(360, 5)
         );
         Action b = Actions.parallel(
-                Actions.moveBy(-500,900,3),
-                Actions.rotateBy(360,5)
+                Actions.moveBy(-500, 900, 3),
+                Actions.rotateBy(360, 5)
         );
         Action c = Actions.run(new Runnable() {
             @Override
