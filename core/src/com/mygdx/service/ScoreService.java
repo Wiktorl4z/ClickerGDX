@@ -7,8 +7,10 @@ public class ScoreService {
 
     public final String GAME_PREFS = "com.mygdx.game.prefs";
     public final String GAME_SCORE = "com.mygdx.game.score";
+    public final String GAME_PASSIVE_INCOME = "com.mygdx.game.passiveincome";
     private Preferences prefs; // saving our scores
     private int points;
+    private int passiveIncome;
 
     public ScoreService() {
         init();
@@ -21,20 +23,26 @@ public class ScoreService {
 
     public void addPoints(int pointsToAdd) {
         points += pointsToAdd;
-        updateSavedScoreInPrefs();
+        updateSavedScoreAndPassiveIncomeInPrefs();
     }
 
     public void loadScores() {
         points = prefs.getInteger(GAME_SCORE);
     }
 
-    public void addPoint() {
-        points++;
-        updateSavedScoreInPrefs();
+    private void loadPassiveIncome(){ // loading passive points
+        passiveIncome = prefs.getInteger(GAME_PASSIVE_INCOME);
+
     }
 
-    private void updateSavedScoreInPrefs() {
-        prefs.putInteger(GAME_SCORE, points); // co zapisujemy
+    public void addPoint() {
+        points++;
+        updateSavedScoreAndPassiveIncomeInPrefs();
+    }
+
+    private void updateSavedScoreAndPassiveIncomeInPrefs() {
+        prefs.putInteger(GAME_SCORE, points); // saving
+        prefs.putInteger(GAME_PASSIVE_INCOME, points);
         prefs.flush();
     }
 
@@ -43,11 +51,13 @@ public class ScoreService {
     }
 
     public void addPassiveIncome() {
-        System.out.println("Passive income click");
+        passiveIncome++;
+        updateSavedScoreAndPassiveIncomeInPrefs();
     }
 
     public void resetGameScore() {
         points = 0;
-        updateSavedScoreInPrefs();
+        passiveIncome = 0;
+        updateSavedScoreAndPassiveIncomeInPrefs();
     }
 }
