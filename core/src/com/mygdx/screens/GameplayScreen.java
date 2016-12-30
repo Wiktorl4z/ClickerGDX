@@ -35,6 +35,7 @@ public class GameplayScreen extends AbstractScreen {
         initResetScoreButton();
         initFlyingStuffObjects();
         startTheMusic();
+
         initPassiveIncomeService();
     }
 
@@ -49,6 +50,13 @@ public class GameplayScreen extends AbstractScreen {
         spriteBatch.begin();
         stage.draw();
         spriteBatch.end();
+    }
+
+    @Override
+    public void pause() {
+        super.pause();
+        game.getScoreService().saveCurrentTimestamp();
+        // TODO make flush of ScoreService always on screen pause()
     }
 
     private void update() {
