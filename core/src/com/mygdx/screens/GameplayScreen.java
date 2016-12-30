@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.mygdx.controllers.FlyingObjectController;
 import com.mygdx.entities.Player;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.service.PassiveIncomeService;
 import com.mygdx.ui.IClickCallBack;
 import com.mygdx.ui.PlayerButton;
 import com.mygdx.ui.ResetScoreButton;
@@ -18,6 +19,7 @@ public class GameplayScreen extends AbstractScreen {
     private ResetScoreButton resetScoreButton;
     private ScoreLabel scoreLabel;// uzywany w 2D
     private FlyingObjectController flyingObjectController;
+    private PassiveIncomeService passiveIncomeService;
 
     public GameplayScreen(MyGdxGame game) {
         super(game);
@@ -33,6 +35,30 @@ public class GameplayScreen extends AbstractScreen {
         initResetScoreButton();
         initFlyingStuffObjects();
         startTheMusic();
+        initPassiveIncomeService();
+    }
+
+
+    @Override
+    public void render(float delta) {
+        super.render(delta);
+        update();
+
+        System.out.printf("Points: " + game.getScoreService().getPoints());
+
+        spriteBatch.begin();
+        stage.draw();
+        spriteBatch.end();
+    }
+
+    private void update() {
+        scoreLabel.setText("Score: " + game.getScoreService().getPoints());
+        stage.act();
+    }
+
+    private void initPassiveIncomeService() {
+        passiveIncomeService = new PassiveIncomeService(game.getScoreService());
+        passiveIncomeService.start();
     }
 
     private void startTheMusic() {
@@ -41,7 +67,6 @@ public class GameplayScreen extends AbstractScreen {
 
     private void initFlyingStuffObjects() {
         flyingObjectController = new FlyingObjectController(game, stage);
-
     }
 
     private void bgInit() {
@@ -82,20 +107,4 @@ public class GameplayScreen extends AbstractScreen {
         stage.addActor(player);
     }
 
-    @Override
-    public void render(float delta) {
-        super.render(delta);
-        update();
-
-        System.out.printf("Points: " + game.getScoreService().getPoints());
-
-        spriteBatch.begin();
-        stage.draw();
-        spriteBatch.end();
-    }
-
-    private void update() {
-        scoreLabel.setText("Score: " + game.getScoreService().getPoints());
-        stage.act();
-    }
 }

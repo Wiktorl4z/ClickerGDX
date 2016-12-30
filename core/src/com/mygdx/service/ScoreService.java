@@ -19,6 +19,7 @@ public class ScoreService {
     private void init() {
         prefs = Gdx.app.getPreferences(GAME_PREFS);
         loadScores();
+        loadPassiveIncome();
     }
 
     public void addPoints(int pointsToAdd) {
@@ -30,7 +31,7 @@ public class ScoreService {
         points = prefs.getInteger(GAME_SCORE);
     }
 
-    private void loadPassiveIncome(){ // loading passive points
+    private void loadPassiveIncome() { // loading passive points
         passiveIncome = prefs.getInteger(GAME_PASSIVE_INCOME);
 
     }
@@ -42,12 +43,16 @@ public class ScoreService {
 
     private void updateSavedScoreAndPassiveIncomeInPrefs() {
         prefs.putInteger(GAME_SCORE, points); // saving
-        prefs.putInteger(GAME_PASSIVE_INCOME, points);
+        prefs.putInteger(GAME_PASSIVE_INCOME, passiveIncome);
         prefs.flush();
     }
 
     public int getPoints() {
         return points;
+    }
+
+    public int getPassiveIncome() {
+        return passiveIncome;
     }
 
     public void addPassiveIncome() {
