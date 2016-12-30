@@ -65,11 +65,11 @@ public class FlyingObject extends Image {
 
     private void reactOnClick() {
         if (FlyingObjectType.MONEY.equals(type)) {
-            game.addPoints(50);
+            game.getScoreService().addPoints(50);
             game.getSoundService().playPickSound();
 
         } else if (FlyingObjectType.PASSIVE.equals(type)) {
-            game.addPassiveIncome();
+            game.getScoreService().addPassiveIncome();
 
         }
         game.getSoundService().playPickSound();
@@ -109,7 +109,7 @@ public class FlyingObject extends Image {
         Action c = Actions.run(new Runnable() {
             @Override
             public void run() {
-                FlyingObject.this.remove(); // remov ing object, when action done
+                FlyingObject.this.remove(); // removing object, when action done
             }
         });
 

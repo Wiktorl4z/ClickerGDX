@@ -53,7 +53,7 @@ public class GameplayScreen extends AbstractScreen {
         resetScoreButton = new ResetScoreButton(new IClickCallBack() {
             @Override
             public void onClick() {
-                game.resetGameScore();
+                game.getScoreService().resetGameScore();
             }
         });
         stage.addActor(resetScoreButton); // dodajemy button do sceny
@@ -69,7 +69,7 @@ public class GameplayScreen extends AbstractScreen {
             @Override
             public void onClick() {
                 player.reactOnClick();
-                game.addPoint();
+                game.getScoreService().addPoint();
                 game.getSoundService().playJumpSound();
             }
         });
@@ -87,7 +87,7 @@ public class GameplayScreen extends AbstractScreen {
         super.render(delta);
         update();
 
-        System.out.printf("Points: " + game.getPoints());
+        System.out.printf("Points: " + game.getScoreService().getPoints());
 
         spriteBatch.begin();
         stage.draw();
@@ -95,7 +95,7 @@ public class GameplayScreen extends AbstractScreen {
     }
 
     private void update() {
-        scoreLabel.setText("Score: " + game.getPoints());
+        scoreLabel.setText("Score: " + game.getScoreService().getPoints());
         stage.act();
     }
 }
