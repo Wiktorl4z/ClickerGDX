@@ -17,12 +17,11 @@ public class ScoreService {
     public ScoreService() {
         init();
     }
-    
+
     private void init() {
         prefs = Gdx.app.getPreferences(GAME_PREFS);
         loadScores();
         loadPassiveIncome();
-
     }
 
     public void addPoints(int pointsToAdd) {
@@ -36,7 +35,6 @@ public class ScoreService {
 
     private void loadPassiveIncome() { // loading passive points
         passiveIncome = prefs.getInteger(GAME_PASSIVE_INCOME);
-
     }
 
     public void addPoint() {
@@ -71,7 +69,6 @@ public class ScoreService {
 
     public long getSavedTimestamp() {
         return prefs.getLong(GAME_SAVED_TIMESTAMP);
-
     }
 
     public void saveCurrentTimestamp() {
