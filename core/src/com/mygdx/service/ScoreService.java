@@ -4,8 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.utils.TimeUtils;
 
-import java.util.concurrent.TimeUnit;
-
 public class ScoreService {
 
     public final String GAME_PREFS = "com.mygdx.game.prefs";
@@ -19,24 +17,12 @@ public class ScoreService {
     public ScoreService() {
         init();
     }
-
-
+    
     private void init() {
         prefs = Gdx.app.getPreferences(GAME_PREFS);
         loadScores();
         loadPassiveIncome();
-        calculateGainedPassiveIncome();
-    }
 
-    private void calculateGainedPassiveIncome() {
-        long savedTimestamp = getSavedTimestamp();
-        if (savedTimestamp > 0) {
-            long millisPassed = TimeUtils.timeSinceMillis(savedTimestamp);
-            long seconds = TimeUnit.MILLISECONDS.toSeconds(millisPassed);
-            System.out.println("Passed seconds:" + seconds);
-        } else {
-            // do nothing
-        }
     }
 
     public void addPoints(int pointsToAdd) {
