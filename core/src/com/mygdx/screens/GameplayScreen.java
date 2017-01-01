@@ -35,7 +35,6 @@ public class GameplayScreen extends AbstractScreen {
         initResetScoreButton();
         initFlyingStuffObjects();
         startTheMusic();
-
         initPassiveIncomeService();
     }
 
@@ -56,7 +55,8 @@ public class GameplayScreen extends AbstractScreen {
     public void pause() {
         super.pause();
         game.getScoreService().saveCurrentTimestamp();
-        // TODO make flush of ScoreService always on screen pause()
+        game.getScoreService().saveCurrentGamestate();
+
     }
 
     private void update() {
