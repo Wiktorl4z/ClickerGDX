@@ -6,10 +6,7 @@ import com.mygdx.controllers.FlyingObjectController;
 import com.mygdx.entities.Player;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.service.PassiveIncomeService;
-import com.mygdx.ui.IClickCallBack;
-import com.mygdx.ui.PlayerButton;
-import com.mygdx.ui.ResetScoreButton;
-import com.mygdx.ui.ScoreLabel;
+import com.mygdx.ui.*;
 
 public class GameplayScreen extends AbstractScreen {
 
@@ -17,7 +14,7 @@ public class GameplayScreen extends AbstractScreen {
     private Player player;
     private PlayerButton playerButton;
     private ResetScoreButton resetScoreButton;
-    private ScoreLabel scoreLabel;// uzywany w 2D
+    private GameLabel gameLabel;// uzywany w 2D
     private FlyingObjectController flyingObjectController;
     private PassiveIncomeService passiveIncomeService;
 
@@ -36,8 +33,16 @@ public class GameplayScreen extends AbstractScreen {
         initFlyingStuffObjects();
         startTheMusic();
         initPassiveIncomeService();
+        initPassiveIncomeInfoDialog();
     }
 
+    private void initPassiveIncomeInfoDialog(){
+        if(passiveIncomeService.getPointsToAdd() > 0) {
+            BasicDialog basicDialog = new BasicDialog();
+            stage.addActor(basicDialog);
+            basicDialog.initContent("Passive income gained: " + passiveIncomeService.getPointsToAdd());
+        }
+    }
 
     @Override
     public void render(float delta) {
@@ -56,11 +61,10 @@ public class GameplayScreen extends AbstractScreen {
         super.pause();
         game.getScoreService().saveCurrentTimestamp();
         game.getScoreService().saveCurrentGamestate();
-
     }
 
     private void update() {
-        scoreLabel.setText("Score: " + game.getScoreService().getPoints());
+        gameLabel.setText("Score: " + game.getScoreService().getPoints());
         stage.act();
     }
 
@@ -93,8 +97,8 @@ public class GameplayScreen extends AbstractScreen {
     }
 
     private void initScoreLabel() {
-        scoreLabel = new ScoreLabel();
-        stage.addActor(scoreLabel);
+        gameLabel = new GameLabel();
+        stage.addActor(gameLabel);
     }
 
     private void initPlayerButton() {
