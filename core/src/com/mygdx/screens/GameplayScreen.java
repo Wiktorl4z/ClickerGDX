@@ -3,6 +3,7 @@ package com.mygdx.screens;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.mygdx.controllers.FlyingObjectController;
+import com.mygdx.controllers.RandomEventController;
 import com.mygdx.entities.Player;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.service.PassiveIncomeService;
@@ -17,6 +18,7 @@ public class GameplayScreen extends AbstractScreen {
     private GameLabel gameLabel;// uzywany w 2D
     private FlyingObjectController flyingObjectController;
     private PassiveIncomeService passiveIncomeService;
+    private RandomEventController randomEventController;
 
     public GameplayScreen(MyGdxGame game) {
         super(game);
@@ -34,14 +36,7 @@ public class GameplayScreen extends AbstractScreen {
         startTheMusic();
         initPassiveIncomeService();
         initPassiveIncomeInfoDialog();
-    }
-
-    private void initPassiveIncomeInfoDialog(){
-        if(passiveIncomeService.getPointsToAdd() > 0) {
-            BasicDialog basicDialog = new BasicDialog();
-            stage.addActor(basicDialog);
-            basicDialog.initContent("Passive income gained: " + passiveIncomeService.getPointsToAdd());
-        }
+        initRandomEventController();
     }
 
     @Override
@@ -61,6 +56,17 @@ public class GameplayScreen extends AbstractScreen {
         super.pause();
         game.getScoreService().saveCurrentTimestamp();
         game.getScoreService().saveCurrentGamestate();
+    }
+    private void initRandomEventController() {
+        randomEventController = new RandomEventController();
+    }
+
+    private void initPassiveIncomeInfoDialog() {
+        if (passiveIncomeService.getPointsToAdd() > 0) {
+            BasicDialog basicDialog = new BasicDialog();
+            stage.addActor(basicDialog);
+            basicDialog.initContent("Passive income gained: " + passiveIncomeService.getPointsToAdd());
+        }
     }
 
     private void update() {
