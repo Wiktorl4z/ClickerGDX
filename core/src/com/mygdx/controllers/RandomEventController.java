@@ -2,12 +2,15 @@ package com.mygdx.controllers;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Timer;
+import com.mygdx.game.MyGdxGame;
 
 public class RandomEventController {
 
     private static final int RANDOM_TICK_INTERVAL = 5;
+    private MyGdxGame game;
 
-    public RandomEventController() {
+    public RandomEventController(MyGdxGame game) { // przekazujemy game
+        this.game = game;
         init();
     }
 
@@ -25,6 +28,31 @@ public class RandomEventController {
     }
 
     private void triggerRandomEvent() {
-        System.out.println("random event triggered");
+        int randomNumber = MathUtils.random(1, 3);
+        switch (randomNumber) {
+            case 1:
+                moneyEvent();
+                break;
+            case 2:
+                loseMoneyEvent();
+                break;
+            case 3:
+                gamePassiveIncome();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void gamePassiveIncome() {
+        game.getScoreService().addPassiveIncome();
+    }
+
+    private void loseMoneyEvent() {
+        game.getScoreService().addPoints(-123);
+    }
+
+    private void moneyEvent() {
+        game.getScoreService().addPoints(123);
     }
 }

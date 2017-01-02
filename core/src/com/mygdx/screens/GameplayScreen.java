@@ -58,7 +58,7 @@ public class GameplayScreen extends AbstractScreen {
         game.getScoreService().saveCurrentGamestate();
     }
     private void initRandomEventController() {
-        randomEventController = new RandomEventController();
+        randomEventController = new RandomEventController(game); // przekazanie konstruktora
     }
 
     private void initPassiveIncomeInfoDialog() {
